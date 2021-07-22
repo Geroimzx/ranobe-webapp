@@ -1,4 +1,4 @@
-# ranobe-webapp
+# Intery Ranobe Website
 
 <p align="center">
   <img src="https://media.giphy.com/media/KUlD98jeXLAytbSU0f/giphy.gif" />
