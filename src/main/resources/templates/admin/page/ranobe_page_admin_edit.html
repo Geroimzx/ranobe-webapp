@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Ranobe Volume Admin Edit</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css" integrity="sha512-xnP2tOaCJnzp2d2IqKFcxuOiVCbuessxM6wuiolT9eeEJCyy0Vhcwa4zQvdrZNVqlqaxXhHqsSV1Ww7T2jSCUQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script th:replace="~{fragments/head :: analytics-script}"></script>
+    <script>
+    function confirmation(id) {
+        var result = confirm("Вы уверены что хотите удалить этот элемент?");
+        if(result == true) {
+            window.location.href = "/admin/page/" + id + "/delete";
+        }
+    }
+    </script>
+</head>
+<body>
+<div th:replace="fragments/header :: header"/>
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Article Name</th>
+                    <th scope="col">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="page, iStat : ${pages}">
+                    <th scope="row" th:text="${page.getId()}"></th>
+                    <td th:text="${page.getName()}"></td>
+                    <td>
+                        <a th:href="@{${'/ranobe/' + page.getId()}}" class="btn btn-outline-primary" target="_blank"><i class="bi bi-book"></i></a>
+                        <a th:href="@{${'/admin/page/' + page.getId() + '/edit'}}" class="btn btn-outline-success" target="_blank"><i class="bi bi-pencil"></i></a>
+                        <button th:attr="onclick=|confirmation('${page.getId()}')|" class="btn btn-outline-danger"><i class="bi bi-trash2"></i></button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div th:replace="~{fragments/google_ad :: ad}"></div>
+<div th:replace="~{fragments/footer :: footer}"></div>
+
+</body>
+</html>

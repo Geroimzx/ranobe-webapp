@@ -1,0 +1,10 @@
+@import '../styles/bootstrap.min.css';
+
+
+.img-mini-poster {
+    min-width:100px;
+    max-width:10%;
+    height:auto;
+    margin: 0px 10px 0px 0px;
+}
+

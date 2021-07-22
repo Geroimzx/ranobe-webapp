@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title th:text="${page.getName()}">Ranobe Page</title>
+  <script th:replace="~{fragments/head :: analytics-script}"></script>
+</head>
+<body>
+<div th:replace="fragments/header :: header"/>
+
+<div class="container-lg border border-1 clearfix pt-4 mx-auto">
+  <img th:src="@{${page.getPosterFileUrl()}}" alt="" class="col-sm-2 pt-2 img-fluid rounded float-sm-start">
+  <dl class="row float-after">
+    <h1 th:text="${page.getName()}"></h1>
+    <h2 class="text-muted" th:text="${page.getAlternativeNames()}"></h2>
+
+    <dt class="col-sm-2" th:text="#{ranobe.page.releaseYear}"></dt>
+    <dd class="col-sm-9" th:text="${page.getReleaseYear()}">Release year</dd>
+
+    <dt class="col-sm-2" th:text="#{ranobe.page.status}"></dt>
+    <dd class="col-sm-9" th:text="${page.getStatus().getStatus()}">Status</dd>
+
+    <dt class="col-sm-2" th:text="#{ranobe.page.country}"></dt>
+    <dd class="col-sm-9" th:text="${page.getCountry().getCountry()}">Country</dd>
+
+    <dt class="col-sm-2"  th:text="#{ranobe.page.genres}"></dt>
+    <dd class="col-sm-9" id="genresList">
+      <div class="d-flex justify-content-start">
+        <div class="d-flex justify-content-start me-2" th:each="genre, status : ${page.getGenresList()}">
+          <a th:href="${'/'}">
+            <p th:text="#{${'ranobe.page.genre.' + genre}}">genre</p>
+          </a>
+          <p th:if="${!status.last}">,</p>
+        </div>
+      </div>
+    </dd>
+
+    <dt class="col-sm-2" th:text="#{ranobe.page.volumeOrig}"></dt>
+    <dd class="col-sm-9" th:text="${page.getVolumeOrig()}">Volume in original</dd>
+
+    <dt class="col-sm-2" th:text="#{ranobe.page.volume}"></dt>
+    <dd class="col-sm-9" th:text="${page.getVolume()}">Volume</dd>
+
+    <p style="white-space: pre-wrap" th:text="${page.getDescription()}">Description</p>
+
+    <input class="form-control" type="text" th:placeholder="#{form.search}">
+
+    <table>
+      <tbody>
+      <tr th:each="volume : ${page.getVolumes()}">
+        <div>
+          <a th:href="@{${'/ranobe/' + page.getId() + '/' + volume.getVolumeNum()}}" th:text="${volume.getName()}"/>
+        </div>
+      </tr>
+      </tbody>
+    </table>
+  </dl>
+
+</div>
+
+<div th:replace="~{fragments/google_ad :: ad}"></div>
+<div th:replace="~{fragments/footer :: footer}"></div>
+</body>
+</html>

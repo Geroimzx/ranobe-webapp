@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${volume.getRanobePage().getName() + ' / ' + volume.getName()}">Ranobe Volume</title>
+    <script th:replace="~{fragments/head :: analytics-script}"></script>
+</head>
+<body style="background-color: #121212;">
+
+<div th:replace="fragments/header :: header"/>
+
+<div class="container pt-3" style="background-color: #202020;">
+    <div class="row">
+        <div class="col-5 text-truncate">
+            <a class="text-decoration-none" th:href="@{${'/ranobe/' + volume.getRanobePage().getId()}}">
+                <p class="text-secondary" th:text="${volume.getRanobePage().getName()}"></p>
+            </a>
+        </div>
+        <div class="col-1">
+            <p class="text-secondary text-center">/</p>
+        </div>
+        <div class="col-5 text-truncate">
+            <a class="text-decoration-none" th:href="@{${'/ranobe/' + volume.getRanobePage().getId() + '/' + volume.getVolumeNum()}}">
+                <p class="text-secondary" th:text="${volume.getName()}"></p>
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="container-md text-white text-break py-2" style="background-color: #282828;">
+    <h1 class="display-6" th:text="${volume.getName()}"></h1>
+    <p th:each="volumeText, tStat : ${volumeText}" th:text="${volumeText}"></p>
+</div>
+
+<div class="container" style="background-color: #202020;">
+    <div class="row" align="center">
+        <a class="col border border-white clearfix text-decoration-none text-light"  th:if="${preNum!=-1}" th:href="@{${'/ranobe/' + volume.getRanobePage().getId() + '/' + preNum}}">
+            <i class="bi bi-arrow-left-circle float-left"></i>
+            <p class="float-right" th:text="#{ranobe.volume.pre}"></p>
+        </a>
+        <a class="col border border-white clearfix text-decoration-none text-light" th:if="${nextNum!=-1}" th:href="@{${'/ranobe/' + volume.getRanobePage().getId() + '/' + nextNum}}">
+            <i class="bi bi-arrow-right-circle float-right"></i>
+            <p th:text="#{ranobe.volume.next}"></p>
+        </a>
+    </div>
+</div>
+
+<div th:replace="~{fragments/google_ad :: ad}"></div>
+
+<div th:replace="~{fragments/footer :: footer}"></div>
+
+</body>
+</html>

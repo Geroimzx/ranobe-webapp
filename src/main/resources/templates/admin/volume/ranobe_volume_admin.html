@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Ranobe Volume Admin</title>
+    <script th:replace="~{fragments/head :: analytics-script}"></script>
+</head>
+<body>
+<div th:replace="fragments/header :: header"/>
+<div class="container-lg border border-1 clearfix pt-4 mx-auto">
+    <div class="card mb-3">
+        <a class="row g-0 list-group-item-light list-group-item-action text-dark text-decoration-none" th:href="@{/admin/volume/new}">
+            <div class="col-md-9">
+                <div class="card-body">
+                    <h5 class="card-title">Создать главу</h5>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="card mb-3">
+        <a class="row g-0 list-group-item-light list-group-item-action text-dark text-decoration-none" th:href="@{/admin/volume/edit}">
+            <div class="col-md-9">
+                <div class="card-body">
+                    <h5 class="card-title">Редактировать главу</h5>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>
+<div th:replace="~{fragments/google_ad :: ad}"></div>
+<div th:replace="~{fragments/footer :: footer}"></div>
+</body>
+</html>

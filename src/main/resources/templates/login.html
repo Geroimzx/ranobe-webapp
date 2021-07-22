@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+  <meta charset="UTF-8">
+  <title>Intery</title>
+  <script th:replace="~{fragments/head :: analytics-script}"></script>
+</head>
+<body class="bg-light text-dark">
+
+<div th:replace="fragments/header :: header"/>
+
+    <div class="container-lg border border-1 clearfix pt-4 mx-auto" align="center">
+        <div th:if="${param.error}">
+          Invalid username and password.
+        </div>
+        <div th:if="${param.logout}">
+          You have been logged out.
+        </div>
+        <form th:action="@{/login}" method="post">
+          <div class="form-group">
+            <label for="username"> User Name : <input class="form-control" id="username" type="text" name="username"/> </label>
+          </div>
+          <div class="form-group">
+            <label for="password"> Password: <input class="form-control" id="password" type="password" name="password"/> </label>
+          </div>
+          <div class="form-group">
+              <a th:href="@{/registration}">
+                  <p th:text="#{btn.reg}"></p>
+              </a>
+            <input class="btn btn-primary" type="submit" th:value="#{btn.login}"/>
+          </div>
+        </form>
+    </div>
+
+<div th:replace="~{fragments/google_ad :: ad}"></div>
+<div th:replace="~{fragments/footer :: footer}"></div>
+</body>
+</html>

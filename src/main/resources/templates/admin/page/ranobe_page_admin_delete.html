@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Panel</title>
+  <script th:replace="~{fragments/head :: analytics-script}"></script>
+</head>
+<body>
+<div th:replace="fragments/header :: header"/>
+<div class="container-lg border border-1 clearfix pt-4 mx-auto">
+  <form th:action="@{${'/admin/page/' + id + '/delete'}}" th:field="*{isConfirmed}" th:method="post">
+    <input name="_method" type="hidden" value="DELETE"/>
+    <input type="checkbox" name="isConfirmed" th:value="*{isConfirmed}">
+    <input type="submit" value="Submit">
+  </form>
+</div>
+<div th:replace="~{fragments/footer :: footer}"></div>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Ranobe Page Admin</title>
+    <script th:replace="~{fragments/head :: analytics-script}"></script>
+</head>
+<body>
+<div th:replace="fragments/header :: header"/>
+<div class="container-md clearfix pt-4  mx-auto">
+  <form th:action="@{/admin/page/new}" class="form-inline my-2 ml-2" th:method="post">
+
+    <div class="alert alert-warning" th:each="err : ${#fields.allErrors()}" th:text="${err}"></div>
+
+    <div class="form-group row">
+      <label for="name" class="col-sm-2 col-form-label" th:text="#{ranobe.page.name}"></label>
+      <div class="col-sm-10">
+        <textarea class="form-control" id="name" type="text" name="name"></textarea>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="alternativeNames" class="col-sm-2 col-form-label" th:text="#{ranobe.page.alternativeNames}"></label>
+      <div class="col-sm-10">
+        <textarea class="form-control" id="alternativeNames" type="text" name="alternativeNames"></textarea>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="releaseYear" class="col-sm-2 col-form-label" th:text="#{ranobe.page.releaseYear}"></label>
+      <div class="col-sm-10">
+        <input class="form-control" id="releaseYear" type="text" name="releaseYear">
+      </div>
+    </div>
+
+    <div class="col-auto my-1">
+      <label for="status" class="col-sm-2 col-form-label" th:text="#{ranobe.page.status}"></label>
+      <select class="custom-select mr-sm-2" id="status" name="status">
+        <option th:each="statOption : ${T(com.geroimzx.ranobe.model.StatusEnum).values()}" th:value="${statOption}" th:text="${statOption.status}"></option>
+      </select>
+    </div>
+
+    <div class="col-auto my-1">
+      <label for="country" class="col-sm-2 col-form-label" th:text="#{ranobe.page.country}"></label>
+      <select class="custom-select mr-sm-2" id="country" name="country">
+        <option th:each="countryOption : ${T(com.geroimzx.ranobe.model.CountryEnum).values()}" th:value="${countryOption}" th:text="${countryOption.country}"></option>
+      </select>
+    </div>
+
+    <div class="col-auto my-1">
+      <label for="genresList" class="col-sm-2 col-form-label" th:text="#{ranobe.page.genres}"></label>
+      <select class="custom-select mr-sm-2" id="genresList"  multiple="multiple" name="genresList">
+        <option th:each="genre : ${T(com.geroimzx.ranobe.model.Genre).values()}" th:value="${genre}" th:text="#{${'ranobe.page.genre.' + genre}}"></option>
+      </select>
+    </div>
+
+    <div class="form-group row">
+      <label for="volumeOrig" class="col-sm-2 col-form-label" th:text="#{ranobe.page.volumeOrig}"></label>
+      <div class="col-sm-10">
+        <input class="form-control" id="volumeOrig" type="text" name="volumeOrig">
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="volume" class="col-sm-2 col-form-label" th:text="#{ranobe.page.volume}"></label>
+      <div class="col-sm-10">
+        <input class="form-control" id="volume" type="text" name="volume">
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="description" class="col-sm-2 col-form-label" th:text="#{ranobe.page.description}"></label>
+      <div class="col-sm-10">
+        <textarea class="form-control" id="description" type="text" name="description"></textarea>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="posterFileUrl" class="col-sm-2 col-form-label" th:text="#{ranobe.page.posterFileUrl}"></label>
+      <div class="col-sm-10">
+        <input class="form-control" id="posterFileUrl" type="text" name="posterFileUrl">
+      </div>
+    </div>
+
+    <button class="btn btn-outline-success" type="submit" th:text="#{message.add}"></button>
+  </form>
+</div>
+<div th:replace="~{fragments/google_ad :: ad}"></div>
+<div th:replace="~{fragments/footer :: footer}"></div>
+</body>
+</html>

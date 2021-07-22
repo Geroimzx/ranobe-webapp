@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Panel Parser</title>
+    <script th:replace="~{fragments/head :: analytics-script}"></script>
+</head>
+<body>
+<div th:replace="fragments/header :: header"/>
+<div class="container-lg border border-1 clearfix pt-4 mx-auto">
+    <div>
+        <form th:action="@{/admin/volume/parse}" class="form-inline my-2 ml-2" th:method="post">
+
+            <input class="form-control" id="url" type="text" placeholder="Enter URL for parsing">
+            <input class="form-control" id="parentId" type="text" placeholder="Enter parent ID">
+            <input class="form-control" id="pageCount" type="text" placeholder="Enter page count">
+            <input class="form-control" id="delay" type="text" placeholder="Enter delay">
+
+            <input class="btn btn-outline-success" type="submit">
+        </form>
+    </div>
+</div>
+<div th:replace="~{fragments/footer :: footer}"></div>
+</body>
+</html>

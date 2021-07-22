@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8">
+    <title>Intery</title>
+    <script th:replace="~{fragments/head :: analytics-script}"></script>
+</head>
+<body class="bg-light text-dark">
+
+<div th:replace="fragments/header :: header"/>
+
+
+<!--
+<div class="container-lg border border-1 clearfix pt-4 mx-auto">
+    <div class="card-deck">
+        <div class="d-flex justify-content-start me-2">
+            <a style="height: 30%; width: 15%; display: block;" class="card text-dark text-decoration-none" th:href="@{${'ranobe/' + page.getId()}}"th:each="page, iStat : ${pages}">
+                <img class="card-img-top" th:src="@{${page.getPosterFileUrl()}}" loading="lazy" th:alt="${page.getName()}">
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${page.getName()}">Card title</h5>
+                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                </div>
+                <div style="width: 100%;"> </div>
+            </a>
+        </div>
+    </div>
+</div>
+-->
+
+<div class="container-lg border border-1 clearfix pt-4 mx-auto">
+    <div class="card mb-3" th:each="page, iStat : ${pages}"> <div class="w-100" th:if="${iStat.index % 4 == 0}"></div>
+        <a class="row g-0 list-group-item-light list-group-item-action text-dark text-decoration-none" th:href="@{${'ranobe/' + page.getId()}}">
+            <div class="col-sm-2">
+                <img class="img-thumbnail rounded-start" th:src="@{{url}(url=${page.getPosterFileUrl()})}" loading="lazy" align="left" alt="..."></img>
+            </div>
+            <div class="col-md-9">
+                <div class="card-body">
+                    <h5 class="card-title" th:href="@{${'/ranobe/' + page.getId()}}" th:text="${page.getName()}"></h5>
+                   <!-- <a th:each="volume, vStat : ${page.getVolumes()}">
+                        <p class="card-text" th:if="vStat.count <= 5">Volume</p>
+                    </a>-->
+                    <!--TODO: <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>-->
+                </div>
+            </div>
+        </a>
+    </div>
+</div>
+
+<div th:replace="~{fragments/google_ad :: ad}"></div>
+<div th:replace="~{fragments/footer :: footer}"></div>
+</body>
+</html>

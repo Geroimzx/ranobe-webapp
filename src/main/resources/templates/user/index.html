@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>All users</title>
+    <link th:href="@{/styles/bootstrap.min.css}" rel="stylesheet"/>
+    <link th:href="@{/styles/style.css}" rel="stylesheet" />
+</head>
+<body>
+<div th:replace="fragments/header :: header"/>
+<div>
+    <table class="table table-dark">
+        <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Id</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user : ${user}">
+            <td th:href="@{/user/{id}(id=${user.getId()})}" th:text="${user.getName()}"/>
+            <td  th:text="${user.getId()}"/>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<form id="tableForm" th:action="@{/user/new}" method="get">
+    <div>
+        <input type="submit" value="Create New User" class="btn btn-dark"  />
+    </div>
+</form>
+
+</body>
+</html>

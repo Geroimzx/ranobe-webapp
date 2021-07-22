@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>New User</title>
+    <link th:href="@{/styles/bootstrap.min.css}" rel="stylesheet"/>
+    <link th:href="@{/styles/style.css}" rel="stylesheet" />
+</head>
+<body>
+<div th:replace="fragments/header :: header"/>
+<form th:method="POST" th:action="@{/user}" th:object="${user}" class="form-group">
+    <label for="name">Enter Name:</label>
+    <input type="text" th:field="*{name}" id="name" class="form-control"/>
+    </br>
+    <input type="submit" value="Create" class="btn btn-dark"/>
+</form>
+
+</body>
+</html>

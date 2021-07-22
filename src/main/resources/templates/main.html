@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Messages</title>
+    <script th:replace="~{fragments/head :: analytics-script}"></script>
+</head>
+<body class="text-justify">
+    <div th:replace="fragments/header :: header"/>
+    <div class="my-5">
+        <form th:action="@{main}" method="post" class="form-inline my-2 ml-2">
+            <p><textarea class="form-control" type="text" name="text" th:placeholder="#{message.enter_message}"></textarea></p>
+            <input class="form-control" type="text" name="tag" th:placeholder="#{message.tag}">
+            <button class="btn btn-outline-success" type="submit" th:text="#{message.add}"></button>
+        </form>
+    </div>
+
+    <form method="post" th:action="@{filter}" class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="text" name="filter" th:placeholder="#{message.filter}">
+        <button class="btn btn-outline-info my-2 my-sm-0" type="submit" th:text="#{message.search}"></button>
+    </form>
+
+    <form method="post" th:action="@{delete}" class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="text" name="id" th:placeholder="ID">
+        <button class="btn btn-outline-danger my-2 my-sm-0" type="submit" th:text="#{message.delete}"></button>
+    </form>
+
+<div class="mx-auto">
+    <table class="table table-striped table-success table-bordered border-light caption-top">
+        <caption th:text="#{message.list}">List of messages</caption>
+        <thead class="table-dark">
+        <tr>
+            <th scope="col" th:text="No">#</th>
+            <th scope="col" th:text="#{message}">Message</th>
+            <th scope="col" th:text="#{message.tag}"/>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="message : ${messages}">
+            <th scope="row" th:text="${message.getId()}"/>
+            <td><textarea class="form-control" type="text" disabled th:text="${message.getText()}"></textarea></textareadisabled></td>
+            <td th:text="${message.getTag()}"/>
+        </tr>
+        </tbody>
+    </table>
+</div>
+    <div>
+    <p class="text-justify" style="white-space: pre-wrap" th:each="message : ${messages}" th:text="${message.getText()}">
+    </div>
+    <div th:replace="~{fragments/google_ad :: ad}"></div>
+    <div th:replace="~{fragments/footer :: footer}"></div>
+</body>
+</html>

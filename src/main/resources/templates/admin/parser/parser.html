@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Parser Page</title>
+    <script th:replace="~{fragments/head :: analytics-script}"></script>
+</head>
+<body class="bg-light">
+<div th:replace="fragments/header :: header"/>
+<div class="container-lg clearfix pt-4 mx-auto bg-dark text-white">
+    <h1 class="display-6" th:text="${volumeTextList.getName()}"></h1>
+    <p style="white-space: pre-wrap" th:text="${volumeTextList.getText()}"></p>  <!--th:each="paragraph : ${volumeTextList}"-->
+</div>
+<div th:replace="~{fragments/footer :: footer}"></div>
+</body>
+</html>
