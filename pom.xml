@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.geroimzx</groupId>
 	<artifactId>ranobe</artifactId>
-	<version>0.1.0-beta</version>
+	<version>0.1.0</version>
 	<packaging>war</packaging>
 	<name>ranobe</name>
 	<description>Demo project Ranobe for Spring Boot</description>
@@ -34,12 +34,6 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
-			<exclusions>
-				<exclusion>
-				<groupId>org.apache.tomcat.embed</groupId>
-				<artifactId>tomcat-embed-websocket</artifactId>
-				</exclusion>
-			</exclusions>
 		</dependency>
 
 		<dependency>
@@ -80,25 +74,12 @@
 			<artifactId>jsoup</artifactId>
 			<version>1.13.1</version>
 		</dependency>
-<dependency>
-  <groupId>com.heroku</groupId>
-  <artifactId>webapp-runner</artifactId>
-  <version>9.0.41.0</version>
-</dependency>
 	</dependencies>
 	<build>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-			<plugin>
-				<groupId>com.heroku.sdk</groupId>
-				<artifactId>heroku-maven-plugin</artifactId>
-				<version>3.0.3</version>
-				<configuration>
-					<appName>intery</appName>
-				</configuration>
 			</plugin>
 		</plugins>
 	</build>

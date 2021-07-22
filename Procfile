@@ -1,1 +1,1 @@
-web: java -jar target/dependency/webapp-runner.jar target/*.war
+web: java -jar target/ranobe-0.1.0.war
