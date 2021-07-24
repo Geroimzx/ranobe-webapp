@@ -8,7 +8,7 @@
 <body>
 <div th:replace="fragments/header :: header"/>
 <div class="container-md clearfix pt-4  mx-auto">
-  <form th:action="@{/admin/page/new}" class="form-inline my-2 ml-2" th:method="post">
+  <form th:action="@{/admin/page/new}" class="form-inline my-2 ml-2" th:method="post" enctype="multipart/form-data">
 
     <div class="alert alert-warning" th:each="err : ${#fields.allErrors()}" th:text="${err}"></div>
 
@@ -76,9 +76,9 @@
     </div>
 
     <div class="form-group row">
-      <label for="posterFileUrl" class="col-sm-2 col-form-label" th:text="#{ranobe.page.posterFileUrl}"></label>
+      <label for="image" class="col-sm-2 col-form-label" th:text="#{ranobe.page.posterFileUrl}"></label>
       <div class="col-sm-10">
-        <input class="form-control" id="posterFileUrl" type="text" name="posterFileUrl">
+        <input class="form-control-file" id="image" type="file" value="image" name="image">
       </div>
     </div>
 

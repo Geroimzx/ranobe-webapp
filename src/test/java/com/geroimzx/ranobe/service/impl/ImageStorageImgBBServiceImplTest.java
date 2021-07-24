@@ -41,6 +41,7 @@ class ImageStorageImgBBServiceImplTest {
         );
 
         ResponseEntity<String> result = imageStorageImgBBService.postFile(multipartFile);
+
         assertEquals(HttpStatus.OK, result.getStatusCode());
     }
 
