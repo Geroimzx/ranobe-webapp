@@ -26,14 +26,10 @@ public class VolumeParser implements Parser {
         Element body = doc.body();
         RanobeVolume volume;
 
-        logger.info("PARSING STARTED");
         Elements paragraphs = body.getElementsByTag("p"); //get volume text
         Elements element = doc.getElementsByClass("ui header"); //get volume name
 
-        logger.info("PARSING ENDED");
-
         List<String> list = new ArrayList<>();
-        logger.info("STRING BUILDER CREATED");
 
         for (Element paragraph : paragraphs) {
             list.add(paragraph.text() + "\n"); //add \n to every string with volume text
@@ -44,8 +40,6 @@ public class VolumeParser implements Parser {
              //fix it at parsing words
             list.remove(parseWord + "\n");
         }
-
-        logger.info("STRING BUILDER DO WORKS");
 
         for (Element str:
              element) {

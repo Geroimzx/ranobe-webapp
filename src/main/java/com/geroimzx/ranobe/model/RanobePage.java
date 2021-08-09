@@ -12,7 +12,7 @@ import java.util.List;
 @Table(name="RANOBE_PAGE_DB")
 public class RanobePage {
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
 
     //Title of ranobe
@@ -52,7 +52,7 @@ public class RanobePage {
     private String posterFileUrl;
 
     //List of volumes for this ranobe
-    @OneToMany(targetEntity=RanobeVolume.class, fetch = FetchType.LAZY, mappedBy = "ranobePage")
+    @OneToMany(targetEntity=RanobeVolume.class, fetch = FetchType.LAZY, mappedBy = "ranobePage", cascade = CascadeType.ALL)
     private List<RanobeVolume> volumes;
 
     public RanobePage() {

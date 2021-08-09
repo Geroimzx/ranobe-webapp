@@ -2,8 +2,6 @@ package com.geroimzx.ranobe.controller;
 
 import com.geroimzx.ranobe.model.RanobePage;
 import com.geroimzx.ranobe.model.RanobeVolume;
-import com.geroimzx.ranobe.repo.CommentRepo;
-import com.geroimzx.ranobe.repo.MessageRepo;
 import com.geroimzx.ranobe.repo.RanobePageRepo;
 import com.geroimzx.ranobe.repo.RanobeVolumeRepo;
 import com.geroimzx.ranobe.service.Parser;
@@ -18,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -30,19 +29,15 @@ public class AdminPanelParserController {
     private RanobeVolumeRepo ranobeVolumeRepo;
 
     @Autowired
-    private CommentRepo commentRepo;
-
-    @Autowired
-    private MessageRepo messageRepo;
-
-    @Autowired
     Parser parser;
 
     Logger logger = LoggerFactory.getLogger(AdminPanelParserController.class);
 
+    // Used in creation parsing task
+    private List<RanobeVolume> embeddedList = new ArrayList<>();
+
     @GetMapping("volume/parser")
-    public String parse(Model model) throws IOException {
-        logger.info("GET MAP EXEC");
+    public String index(Model model) {
         return "admin/parser/index";
     }
 
@@ -57,6 +52,7 @@ public class AdminPanelParserController {
                 "Горячие клавиши:", "Предыдущая часть",
                 "Следующая часть",
                 "Авторизуйтесь или зарегистрируйтесь, чтобы получать уведомления о новых главах и писать комментарии."};
+
         List<RanobeVolume> volumeList = parser.parseWithNextPageUrl(delay, url,pageCount, ignoredWords);
 
         model.addAttribute("volumeTextList", volumeList.get(0));
