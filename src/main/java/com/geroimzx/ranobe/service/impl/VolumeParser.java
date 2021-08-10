@@ -22,7 +22,22 @@ public class VolumeParser implements Parser {
 
     private String nextUrlToParse;
 
-    Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress("140.227.67.135", 6000));
+    private Proxy proxy;
+
+    public VolumeParser() {
+    }
+
+    public VolumeParser(Proxy proxy) {
+        this.proxy = proxy;
+    }
+
+    public Proxy getProxy() {
+        return proxy;
+    }
+
+    public void setProxy(Proxy proxy) {
+        this.proxy = proxy;
+    }
 
     @Override
     public RanobeVolume parse(String url, String... ignoreWords) throws IOException {
