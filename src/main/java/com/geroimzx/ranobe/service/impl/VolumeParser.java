@@ -26,6 +26,7 @@ public class VolumeParser implements Parser {
 
     @Override
     public RanobeVolume parse(String url, String... ignoreWords) throws IOException {
+
         Document doc = Jsoup.connect(url).proxy(proxy).get();
         Element body = doc.body();
         RanobeVolume volume;
