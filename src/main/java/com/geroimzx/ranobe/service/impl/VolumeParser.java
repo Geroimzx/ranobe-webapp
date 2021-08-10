@@ -11,6 +11,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.net.InetSocketAddress;
+import java.net.Proxy;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,9 +22,11 @@ public class VolumeParser implements Parser {
 
     private String nextUrlToParse;
 
+    Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress("140.227.67.135", 6000));
+
     @Override
     public RanobeVolume parse(String url, String... ignoreWords) throws IOException {
-        Document doc = Jsoup.connect(url).get();
+        Document doc = Jsoup.connect(url).proxy(proxy).get();
         Element body = doc.body();
         RanobeVolume volume;
 
@@ -69,7 +73,7 @@ public class VolumeParser implements Parser {
                 volumeList.add(parse(nextUrlToParse, ignoredWords));
             }
             Thread.sleep(delay);
-            Element nextUrlElem = Jsoup.connect(nextUrlToParse).get().body().getElementsContainingOwnText("Вперед").last();
+            Element nextUrlElem = Jsoup.connect(nextUrlToParse).proxy(proxy).get().body().getElementsContainingOwnText("Вперед").last();
             logger.info("Next url to parse: " + nextUrlElem.parent().attr("href"));
             nextUrlToParse = nextUrlElem.parent().attr("href");
             Thread.sleep(delay);
