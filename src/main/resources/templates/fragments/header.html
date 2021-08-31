@@ -1,4 +1,4 @@
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
     <header th:fragment="header">
         <nav class="navbar navbar-fixed-top navbar-expand-lg navbar-dark" style="background-color: #181818;">
             <div class="container">
@@ -14,11 +14,19 @@
                         <li class="nav-item">
                             <a class="nav-link" href="/main" th:utext="#{header.item.messages}">Messages</a>
                         </li>
+                        <a class="nav-link active" sec:authorize-url="/admin" href="/admin" th:text="#{btn.admin.panel}"></a>
                     </ul>
                     <div class="d-flex">
-                        <a style="text-decoration: none;" href="/login">
+                        <a sec:authorize="isAnonymous()" style="text-decoration: none;" href="/login">
                             <i class="bi bi-box-arrow-in-right"></i>
                             <h th:text="#{btn.login}"></h>
+                        </a>
+                    </div>
+                    <div class="d-flex">
+                        <a sec:authorize="isAuthenticated()" style="text-decoration: none;" href="/profile">
+                            <i class="bi bi-person-circle"></i>
+                            <h sec:authentication="name"></h>
+                            <h style="color: #FF0000" sec:authorize="hasAuthority('ADMIN')" th:text="Админ"></h>
                         </a>
                     </div>
                 </div>
