@@ -32,8 +32,9 @@ public class User {
     @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
     @Enumerated(EnumType.STRING)
     @JoinColumn(name = "user_id")
+    @JoinTable(joinColumns = @JoinColumn(name = "user_id"))
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @Cascade(org.hibernate.annotations.CascadeType.ALL)
+    @Cascade({org.hibernate.annotations.CascadeType.ALL})
     private Set<RoleEnum> roles;
 
 
