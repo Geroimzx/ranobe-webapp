@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Panel User</title>
+    <script th:replace="~{fragments/head :: analytics-script}"></script>
+    <script>
+        function confirmation(username) {
+        var result = confirm("Вы уверены что хотите удалить этот элемент?");
+            if(result == true) {
+                window.location.href = "/admin/user/" + username + "/delete";
+            }
+        }
+    </script>
+</head>
+<body>
+    <div th:replace="fragments/header :: header"/>
+
+    <div>
+        <table class="table table-dark">
+            <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Name</th>
+                <th scope="col">Roles</th>
+                <th scope="col">Activity</th>
+                <th scope="col">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="user : ${userList}">
+                <td th:text="${user.getId()}"/>
+                <td th:text="${user.getUsername()}"/>
+                <td th:text="${user.getRoles()}"/>
+                <td th:text="${user.isActive()}"/>
+                <td>
+                    <a th:href="@{${'/u/' + user.getUsername()}}" class="btn btn-outline-primary" target="_blank"><i class="bi bi-book"></i></a>
+                    <a th:href="@{${'/admin/user/' + user.getUsername() + '/edit'}}" class="btn btn-outline-success"><i class="bi bi-pencil"></i></a>
+                    <button th:attr="onclick=|confirmation('${user.getUsername()}')|" class="btn btn-outline-danger"><i class="bi bi-trash2"></i></button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div th:replace="~{fragments/footer :: footer}"></div>
+</body>
+</html>
