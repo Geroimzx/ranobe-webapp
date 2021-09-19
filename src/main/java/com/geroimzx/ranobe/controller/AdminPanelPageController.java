@@ -50,7 +50,7 @@ public class AdminPanelPageController {
             }
         }
         ranobePageRepo.save(ranobePage);
-        return "redirect:/ranobe/" + ranobePageRepo.findByName(ranobePage.getName()).getId();
+        return "redirect:/ranobe/" + ranobePageRepo.findIdByName(ranobePage.getName()).getId();
     }
 
     @GetMapping("/page/edit")
@@ -85,7 +85,7 @@ public class AdminPanelPageController {
         }
         ranobePage.setId(id);
         ranobePageRepo.save(ranobePage);
-        return "redirect:/ranobe/" + ranobePageRepo.findByName(ranobePage.getName()).getId();
+        return "redirect:/ranobe/" + ranobePageRepo.findIdByName(ranobePage.getName()).getId();
     }
 
     @GetMapping("/page/{id}/delete")

@@ -34,12 +34,12 @@ public class MainController {
     @GetMapping("/")
     public String mainPage(Model model) {
         List<RanobePage> pageList = new ArrayList<>();
-        Iterable<RanobePage> iPage = ranobePageRepo.findAll();
+        Iterable<RanobePage> iPage = ranobePageRepo.findAllOnlyBasicValue();
         iPage.forEach(pageList::add);
         pageList.sort(new Comparator<RanobePage>() {
             @Override
             public int compare(RanobePage o1, RanobePage o2) {
-                return 0;
+                return (int) (o2.getId() - o1.getId());
             }
         });
         model.addAttribute("pages", pageList);

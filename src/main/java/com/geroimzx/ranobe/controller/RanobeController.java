@@ -2,6 +2,7 @@ package com.geroimzx.ranobe.controller;
 
 import com.geroimzx.ranobe.model.Genre;
 import com.geroimzx.ranobe.model.RanobePage;
+import com.geroimzx.ranobe.model.RanobeVolume;
 import com.geroimzx.ranobe.repo.CommentRepo;
 import com.geroimzx.ranobe.repo.RanobePageRepo;
 import com.geroimzx.ranobe.repo.RanobeVolumeRepo;
@@ -33,8 +34,9 @@ public class RanobeController {
 
     @GetMapping("{pageId}")
     public String getRanobePageView(@PathVariable(value = "pageId") Long pageId, Model model) {
-        if (ranobePageRepo.findById(pageId).isPresent()) {
+        if (ranobePageRepo.existsById(pageId)) {
             RanobePage ranobePage = ranobePageRepo.findById(pageId).get();
+
             ranobePage.getVolumes().sort((o1, o2) -> o1.getVolumeNum() - o2.getVolumeNum());
             model.addAttribute("page", ranobePage);
             return "ranobe/ranobe_page";
@@ -45,19 +47,21 @@ public class RanobeController {
     @GetMapping("{id}/{volumeNum}")
     public String getRanobeVolumeView(@PathVariable("id") Long pageId, @PathVariable("volumeNum") int volumeId, Model model) {
         if (ranobeVolumeRepo.existsByRanobePageIdAndVolumeNum(pageId, volumeId)) {
-            model.addAttribute("volume", ranobeVolumeRepo.findByRanobePageIdAndVolumeNum(pageId, volumeId));
+            RanobeVolume ranobeVolume = ranobeVolumeRepo.findByRanobePageIdAndVolumeNum(pageId, volumeId);
 
-            List<String> volumeText = Arrays.asList(ranobeVolumeRepo.findByRanobePageIdAndVolumeNum(pageId, volumeId).getText().split("\\n"));
+            model.addAttribute("volume", ranobeVolume);
+
+            List<String> volumeText = Arrays.asList(ranobeVolume.getText().split("\\n"));
 
             model.addAttribute("volumeText", volumeText);
 
             if(ranobeVolumeRepo.existsByRanobePageIdAndVolumeNum(pageId, volumeId - 1)) {
-                model.addAttribute("preNum", ranobeVolumeRepo.findByRanobePageIdAndVolumeNum(pageId, volumeId - 1).getVolumeNum());
+                model.addAttribute("preNum", ranobeVolume.getVolumeNum() - 1);
             } else {
                 model.addAttribute("preNum", -1);
             }
             if(ranobeVolumeRepo.existsByRanobePageIdAndVolumeNum(pageId, volumeId + 1)) {
-                model.addAttribute("nextNum", ranobeVolumeRepo.findByRanobePageIdAndVolumeNum(pageId, volumeId + 1).getVolumeNum());
+                model.addAttribute("nextNum", ranobeVolume.getVolumeNum() + 1);
             } else {
                 model.addAttribute("nextNum", -1);
             }

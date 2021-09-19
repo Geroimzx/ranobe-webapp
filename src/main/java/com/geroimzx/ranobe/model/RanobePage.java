@@ -2,10 +2,13 @@ package com.geroimzx.ranobe.model;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.orm.jpa.EntityManagerFactoryUtils;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -52,13 +55,37 @@ public class RanobePage {
     private String posterFileUrl;
 
     //List of volumes for this ranobe
-    @OneToMany(targetEntity=RanobeVolume.class, fetch = FetchType.LAZY, mappedBy = "ranobePage", cascade = CascadeType.ALL)
+    @OneToMany(targetEntity=RanobeVolume.class, fetch = FetchType.LAZY, mappedBy = "ranobePage", cascade = CascadeType.REMOVE)
     private List<RanobeVolume> volumes;
 
     public RanobePage() {
 
     }
 
+    public RanobePage(Long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public RanobePage(Long id, String name, String posterFileUrl) {
+        this.id = id;
+        this.name = name;
+        this.posterFileUrl = posterFileUrl;
+    }
+
+    public RanobePage(Long id, String name, String alternativeNames, int releaseYear, StatusEnum status, CountryEnum country, List<Genre> genresList, int volumeOrig, int volume, String description, String posterFileUrl, Long v_id, String v_name, int v_volumeNum) {
+        this.id = id;
+        this.name = name;
+        this.alternativeNames = alternativeNames;
+        this.releaseYear = releaseYear;
+        this.status = status;
+        this.country = country;
+        this.genresList = genresList;
+        this.volumeOrig = volumeOrig;
+        this.volume = volume;
+        this.description = description;
+        this.posterFileUrl = posterFileUrl;
+    }
 
     public RanobePage(String name, String alternativeNames, int releaseYear, StatusEnum status, CountryEnum country, List<Genre> genresList, int volumeOrig, int volume, String description, String posterFileUrl, List<RanobeVolume> volumes) {
         this.name = name;
