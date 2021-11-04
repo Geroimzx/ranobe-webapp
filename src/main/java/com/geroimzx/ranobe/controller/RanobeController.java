@@ -1,6 +1,5 @@
 package com.geroimzx.ranobe.controller;
 
-import com.geroimzx.ranobe.model.Genre;
 import com.geroimzx.ranobe.model.RanobePage;
 import com.geroimzx.ranobe.model.RanobeVolume;
 import com.geroimzx.ranobe.repo.CommentRepo;

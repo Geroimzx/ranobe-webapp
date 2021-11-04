@@ -1,9 +1,7 @@
 package com.geroimzx.ranobe.controller;
 
 import com.geroimzx.ranobe.model.RanobePage;
-import com.geroimzx.ranobe.model.RanobeVolume;
 import com.geroimzx.ranobe.repo.RanobePageRepo;
-import com.geroimzx.ranobe.repo.RanobeVolumeRepo;
 import com.geroimzx.ranobe.service.impl.ImageStorageImgBBServiceImpl;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -17,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
-import java.util.List;
 
 @Controller
 @RequestMapping("admin")
