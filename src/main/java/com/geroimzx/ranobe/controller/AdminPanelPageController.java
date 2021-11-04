@@ -1,7 +1,9 @@
 package com.geroimzx.ranobe.controller;
 
 import com.geroimzx.ranobe.model.RanobePage;
+import com.geroimzx.ranobe.model.RanobeVolume;
 import com.geroimzx.ranobe.repo.RanobePageRepo;
+import com.geroimzx.ranobe.repo.RanobeVolumeRepo;
 import com.geroimzx.ranobe.service.impl.ImageStorageImgBBServiceImpl;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 @RequestMapping("admin")
@@ -35,6 +38,7 @@ public class AdminPanelPageController {
     @PostMapping("/page/new")
     public String ranobePageAdminPostView(@Valid RanobePage ranobePage, MultipartFile image, BindingResult bindingResult) {
         if(bindingResult.hasErrors()) {
+            logger.info("Error occurred when new page created");
             return "admin/page/ranobe_page_admin";
         }
         if(!image.isEmpty()) {
@@ -50,12 +54,12 @@ public class AdminPanelPageController {
             }
         }
         ranobePageRepo.save(ranobePage);
-        return "redirect:/ranobe/" + ranobePageRepo.findIdByName(ranobePage.getName()).getId();
+        return "redirect:/ranobe/" + ranobePageRepo.findByName(ranobePage.getName()).getId();
     }
 
     @GetMapping("/page/edit")
     public String ranobePageEditAdminView(Model model) {
-        model.addAttribute("pages", ranobePageRepo.findAll());
+        model.addAttribute("pages", ranobePageRepo.findAllOnlyBasicValue());
         return "admin/page/ranobe_page_admin_edit";
     }
 
@@ -85,7 +89,7 @@ public class AdminPanelPageController {
         }
         ranobePage.setId(id);
         ranobePageRepo.save(ranobePage);
-        return "redirect:/ranobe/" + ranobePageRepo.findIdByName(ranobePage.getName()).getId();
+        return "redirect:/ranobe/" + ranobePageRepo.findByName(ranobePage.getName()).getId();
     }
 
     @GetMapping("/page/{id}/delete")
